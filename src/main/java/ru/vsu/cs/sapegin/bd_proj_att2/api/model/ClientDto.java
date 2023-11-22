@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ClientDto {
     private int id;
-    private String reg_number;
-    private String brand;
-    private int year;
-    private int cost;
+    private String passport_ser;
+    private String passport_num;
+    private String surname;
+    private String name;
+    private String phone;
 }
