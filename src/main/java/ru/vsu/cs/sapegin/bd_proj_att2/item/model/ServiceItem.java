@@ -15,10 +15,15 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
+//todo: что делать с тем, что нам не нужен конструктор со всеми полями (id не надо передавать)
+
 public class ServiceItem {
+
     @Id
     @GeneratedValue
     private int id;
+
     private Date startDate;
     private Date endDate;
 
@@ -28,7 +33,7 @@ public class ServiceItem {
     @JoinColumn(name = "car_id", referencedColumnName = "car_id") //сначала - внешний ключ, потом - куда он ссылается
     private CarItem car;
     @ManyToOne
-    @JoinColumn(name = "client_id", referencedColumnName = "client_id") //где JoinColumn - Это owning side (владеющая сторона)
+    @JoinColumn(name = "client_id", referencedColumnName = "client_id") //где JoinColumn - Это owning side (владеющая сторона) (владеет внешним ключом)
     private ClientItem client;
 
     @ManyToMany

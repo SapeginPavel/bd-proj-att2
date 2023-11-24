@@ -1,13 +1,12 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.item.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "public.offense")
@@ -21,4 +20,7 @@ public class OffenseItem {
     private int id;
     private String problem;
     private int fine;
+
+    @ManyToMany(mappedBy = "offenses")
+    private List<ServiceItem> services;
 }
