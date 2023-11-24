@@ -1,13 +1,12 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.item.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "public.car")
@@ -23,4 +22,7 @@ public class CarItem {
     private String brand;
     private int year;
     private int cost;
+
+    @OneToMany(mappedBy = "car")
+    private List<ServiceItem> services;
 }

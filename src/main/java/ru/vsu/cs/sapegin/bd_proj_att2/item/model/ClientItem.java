@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "public.client")
 @Data
@@ -27,4 +29,7 @@ public class ClientItem {
 
     @Size(min = 11, max = 11)
     private String phone;
+
+    @OneToMany(mappedBy = "client") //название поля, которое сюда ссылается
+    private List<ServiceItem> services;
 }

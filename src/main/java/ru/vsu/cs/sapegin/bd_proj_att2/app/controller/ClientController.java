@@ -21,6 +21,7 @@ public class ClientController implements ClientApi {
 
     @Override
     public ResponseEntity<ClientDto> getClientById(int id) {
+
         return null;
     }
 }
