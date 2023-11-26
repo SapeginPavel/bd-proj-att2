@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "public.offense")
+@Table(name = "offense")
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,7 +17,7 @@ import java.util.List;
 public class OffenseItem {
     @Id
     @GeneratedValue
-    private int id;
+    private int offense_id;
     private String problem;
     private int fine;
 

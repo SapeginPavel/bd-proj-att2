@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "public.car")
+@Table(name = "car")
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,7 +17,7 @@ import java.util.List;
 public class CarItem {
     @Id
     @GeneratedValue
-    private int id;
+    private int car_id;
     private String reg_number;
     private String brand;
     private int year;

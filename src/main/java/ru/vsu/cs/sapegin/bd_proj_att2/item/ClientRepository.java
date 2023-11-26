@@ -6,4 +6,5 @@ import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 
 @Repository
 public interface ClientRepository extends JpaRepository<ClientItem, Integer> {
+
 }

@@ -8,7 +8,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "public.client")
+@Table(name = "client")
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,7 +16,8 @@ import java.util.List;
 public class ClientItem {
     @Id
     @GeneratedValue
-    private int id;
+    @Column(name = "client_id")
+    private int client_id;
 
     //Не используем @Column, так как названия совпадают с названиями в таблице
     private String passport_ser;

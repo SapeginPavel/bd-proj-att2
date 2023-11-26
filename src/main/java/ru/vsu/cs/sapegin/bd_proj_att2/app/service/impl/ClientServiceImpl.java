@@ -21,8 +21,18 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientItem getClient(int id) {
+    public ClientItem getClientById(int id) {
         return clientRepository.findById(id).orElseThrow(() -> new NotFoundException("Client with this id not found"));
+    }
+
+    @Override
+    public List<ClientItem> getClientsBySurname(String surname) {
+        return null;
+    }
+
+    @Override
+    public List<ClientItem> getClientByPhone(String phone) {
+        return null;
     }
 
     @Override

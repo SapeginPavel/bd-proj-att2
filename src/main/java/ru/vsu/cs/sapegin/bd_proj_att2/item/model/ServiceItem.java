@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "public.service")
+@Table(name = "service")
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,7 +22,7 @@ public class ServiceItem {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int service_id;
 
     private Date startDate;
     private Date endDate;
