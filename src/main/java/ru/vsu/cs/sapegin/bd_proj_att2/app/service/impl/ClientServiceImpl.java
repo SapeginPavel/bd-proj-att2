@@ -1,5 +1,6 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ClientService;
@@ -8,6 +9,7 @@ import ru.vsu.cs.sapegin.bd_proj_att2.item.ClientRepository;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientItem> getClientsBySurname(String surname) {
-        return null;
+        return clientRepository.findAll().stream().filter(clientItem -> clientItem.getSurname().equals(surname)).collect(Collectors.toList()); //clientRepository.findBySurname(surname)
     }
 
     @Override

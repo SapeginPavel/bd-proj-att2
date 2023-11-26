@@ -31,8 +31,9 @@ public class ClientController implements ClientApi {
     }
 
     @Override
-    public ResponseEntity<ClientDto> getClientBySurname(String surname) {
-        return null;
+    public ResponseEntity<List<ClientDto>> getClientBySurname(String surname) {
+        List<ClientItem> clients = clientService.getClientsBySurname(surname);
+        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(clients));
     }
 
     @Override
