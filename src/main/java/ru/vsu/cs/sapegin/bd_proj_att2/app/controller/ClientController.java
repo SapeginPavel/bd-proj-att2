@@ -37,7 +37,36 @@ public class ClientController implements ClientApi {
     }
 
     @Override
-    public ResponseEntity<ClientDto> getClientByPhone(String phone) {
-        return null;
+    public ResponseEntity<List<ClientDto>> getClientByPhone(String phone) {
+        List<ClientItem> clients = clientService.getClientByPhone(phone);
+        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(clients));
+    }
+
+    @Override
+    public ResponseEntity<Void> addClient(ClientDto clientDto) {
+        ClientItem clientItem = ClientMapper.INSTANCE.mapToItem(clientDto);
+        clientService.saveClient(clientItem);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> updateClient(int id, ClientDto clientDto) {
+        ClientItem updatedClient = ClientMapper.INSTANCE.mapToItem(clientDto);
+
+        ClientItem currentClient = clientService.getClientById(id);
+        currentClient.setName(updatedClient.getName());
+        currentClient.setSurname(updatedClient.getSurname());
+        currentClient.setPhone(updatedClient.getPhone());
+        currentClient.setPassport_num(updatedClient.getPassport_num());
+        currentClient.setPassport_ser(updatedClient.getPassport_ser());
+
+        clientService.updateClient(id, updatedClient);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteClient(int id) {
+        clientService.deleteClient(id);
+        return ResponseEntity.ok().build();
     }
 }

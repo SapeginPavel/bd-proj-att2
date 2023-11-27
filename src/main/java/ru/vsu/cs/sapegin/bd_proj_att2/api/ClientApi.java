@@ -1,9 +1,7 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.api;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
 
 import java.util.List;
@@ -20,5 +18,14 @@ public interface ClientApi {
     ResponseEntity<List<ClientDto>> getClientBySurname( @PathVariable("surname") String surname );
 
     @GetMapping("/phone={phone}")
-    ResponseEntity<ClientDto> getClientByPhone( @PathVariable("phone") String phone );
+    ResponseEntity<List<ClientDto>> getClientByPhone( @PathVariable("phone") String phone );
+
+    @PostMapping()
+    ResponseEntity<Void> addClient( @RequestBody ClientDto clientDto );
+
+    @PutMapping("/id={clientId}")
+    ResponseEntity<Void> updateClient( @PathVariable("clientId") int id, @RequestBody ClientDto clientDto );
+
+    @DeleteMapping("/id={clientId}")
+    ResponseEntity<Void> deleteClient( @PathVariable("clientId") int id );
 }

@@ -3,6 +3,7 @@ package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ClientService;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.ClientRepository;
@@ -34,21 +35,21 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientItem> getClientByPhone(String phone) {
-        return null;
+        return clientRepository.findAll().stream().filter(clientItem -> clientItem.getPhone().equals(phone)).toList();
     }
 
     @Override
-    public ClientItem saveClient(int id) {
-        return null;
+    public void saveClient(ClientItem newClient) {
+        clientRepository.saveAndFlush(newClient);
     }
 
     @Override
-    public ClientItem updateClient(int id) {
-        return null;
+    public void updateClient(int id, ClientItem updatedClient) {
+        //todo: нет нормального обновления
     }
 
     @Override
     public void deleteClient(int id) {
-
+        clientRepository.delete(getClientById(id));
     }
 }
