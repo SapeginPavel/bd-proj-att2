@@ -17,8 +17,8 @@ public interface ServiceApi {
     @GetMapping("/id={service_id}")
     ResponseEntity<ServiceDto> getServiceById( @PathVariable("service_id") int id );
 
-    @GetMapping("/id={client_id}")
-    ResponseEntity<List<ServiceDto>> getServicesForClientWithId(@PathVariable("client_id") int clientId );
+    @GetMapping("/client_id={client_id}")
+    ResponseEntity<List<ServiceDto>> getServicesForClientWithId( @PathVariable("client_id") int clientId );
 
     @PostMapping
     ResponseEntity<Void> addService( @RequestBody ServiceDto ServiceDto );

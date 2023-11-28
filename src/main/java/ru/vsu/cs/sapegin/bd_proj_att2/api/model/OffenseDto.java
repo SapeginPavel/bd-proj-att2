@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class OffenseDto {
-    private int id;
+    private int offense_id;
     private String problem;
     private int fine;
 }

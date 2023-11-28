@@ -4,11 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.ServiceApi;
-import ru.vsu.cs.sapegin.bd_proj_att2.api.model.OffenseDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ServiceDto;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.CarMapper;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ClientMapper;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.OffenseMapper;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ServiceMapper;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ServiceService;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.CarServiceImpl;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ClientServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ServiceServiceImpl;
+import ru.vsu.cs.sapegin.bd_proj_att2.item.model.CarItem;
+import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
+import ru.vsu.cs.sapegin.bd_proj_att2.item.model.OffenseItem;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
 import java.util.List;
@@ -18,6 +24,8 @@ import java.util.List;
 public class ServiceController implements ServiceApi {
 
     private final ServiceServiceImpl serviceService;
+    private final CarServiceImpl carService;
+    private final ClientServiceImpl clientService;
 
     @Override
     public ResponseEntity<List<ServiceDto>> getAllServices() {
@@ -27,26 +35,55 @@ public class ServiceController implements ServiceApi {
 
     @Override
     public ResponseEntity<ServiceDto> getServiceById(int id) {
-        return null;
+        ServiceItem serviceItem = serviceService.getServiceById(id);
+        return ResponseEntity.ok(ServiceMapper.INSTANCE.mapToDto(serviceItem));
     }
 
     @Override
     public ResponseEntity<List<ServiceDto>> getServicesForClientWithId(int clientId) {
-        return null;
+        List<ServiceItem> serviceItems = serviceService.getServicesForClientWithId(clientId);
+        return ResponseEntity.ok(ServiceMapper.INSTANCE.mapToDtos(serviceItems));
     }
 
     @Override
-    public ResponseEntity<Void> addService(ServiceDto ServiceDto) {
-        return null;
+    public ResponseEntity<Void> addService(ServiceDto serviceDto) {
+        ServiceItem newService = ServiceMapper.INSTANCE.mapToItem(serviceDto);
+        newService.setCar(carService.getCarById(serviceDto.getCar().getCar_id()));
+        newService.setClient(clientService.getClientById(serviceDto.getClient().getClient_id()));
+        serviceService.saveService(newService);
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Void> updateService(int id, ServiceDto updatedServiceDto) {
-        return null;
+        ServiceItem oldServiceItem = serviceService.getServiceById(id);
+
+        if (updatedServiceDto.getStartDate() != null) {
+            oldServiceItem.setStartDate(updatedServiceDto.getStartDate());
+        }
+        if (updatedServiceDto.getEndDate() != null) {
+            oldServiceItem.setEndDate(updatedServiceDto.getEndDate());
+        }
+
+        if (updatedServiceDto.getCar() != null) {
+            oldServiceItem.setCar(carService.getCarById(updatedServiceDto.getCar().getCar_id()));
+        }
+        if (updatedServiceDto.getClient() != null) {
+            oldServiceItem.setClient(clientService.getClientById(updatedServiceDto.getClient().getClient_id()));
+        }
+
+        if (updatedServiceDto.getOffenses() != null) {
+            List<OffenseItem> newOffenses = OffenseMapper.INSTANCE.mapToItems(updatedServiceDto.getOffenses());
+            oldServiceItem.getOffenses().addAll(newOffenses);
+        }
+
+        serviceService.updateService(id, oldServiceItem);
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Void> deleteService(int id) {
-        return null;
+        serviceService.deleteService(id);
+        return ResponseEntity.ok().build();
     }
 }
