@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.ServiceApi;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.OffenseDto;
+import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ServiceDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
 import java.util.List;
@@ -26,17 +27,17 @@ public class ServiceController implements ServiceApi {
     }
 
     @Override
-    public ResponseEntity<Void> addOffense(OffenseDto offenseDto) {
+    public ResponseEntity<Void> addService(ServiceDto ServiceDto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> updateOffense(int id, OffenseDto updatedOffenseDto) {
+    public ResponseEntity<Void> updateService(int id, ServiceDto updatedServiceDto) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> deleteOffense(int id) {
+    public ResponseEntity<Void> deleteService(int id) {
         return null;
     }
 }

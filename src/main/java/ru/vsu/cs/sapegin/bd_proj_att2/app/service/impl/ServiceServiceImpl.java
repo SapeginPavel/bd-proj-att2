@@ -2,10 +2,8 @@ package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.vsu.cs.sapegin.bd_proj_att2.api.model.OffenseDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ServiceService;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.model.OffenseItem;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.repository.ServiceRepository;
 
@@ -29,22 +27,21 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public List<ServiceItem> getServicesForClientWithId(int clientId) {
-
-        return null;
+        return serviceRepository.findAll().stream().filter(serviceItem -> serviceItem.getClient().getClient_id() == clientId).toList();
     }
 
     @Override
-    public void addOffense(OffenseItem newOffense) {
+    public void addService(ServiceItem newService) {
+        serviceRepository.saveAndFlush(newService);
+    }
+
+    @Override
+    public void updateService(int id, ServiceItem updatedServiceDto) {
 
     }
 
     @Override
-    public void updateOffense(int id, OffenseDto updatedOffenseDto) {
-
-    }
-
-    @Override
-    public void deleteOffense(int id) {
+    public void deleteService(int id) {
 
     }
 }
