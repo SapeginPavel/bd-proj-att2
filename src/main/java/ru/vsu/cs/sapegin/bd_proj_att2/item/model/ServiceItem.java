@@ -16,8 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-//todo: что делать с тем, что нам не нужен конструктор со всеми полями (id не надо передавать)
-
 public class ServiceItem {
 
     @Id

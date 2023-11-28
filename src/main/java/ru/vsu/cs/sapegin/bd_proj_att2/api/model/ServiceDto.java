@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @Data
 public class ServiceDto {
-    private int id;
+    private int service_id;
     private Date startDate;
     private Date endDate;
 
