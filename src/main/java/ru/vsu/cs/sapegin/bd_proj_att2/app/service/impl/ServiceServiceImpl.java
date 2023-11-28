@@ -31,17 +31,17 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public void addService(ServiceItem newService) {
+    public void saveService(ServiceItem newService) {
         serviceRepository.saveAndFlush(newService);
     }
 
     @Override
     public void updateService(int id, ServiceItem updatedServiceDto) {
-
+        saveService(updatedServiceDto);
     }
 
     @Override
     public void deleteService(int id) {
-
+        serviceRepository.deleteById(id);
     }
 }

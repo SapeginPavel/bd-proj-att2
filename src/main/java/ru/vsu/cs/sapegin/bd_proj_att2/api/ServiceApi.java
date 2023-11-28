@@ -12,13 +12,13 @@ import java.util.List;
 public interface ServiceApi {
 
     @GetMapping
-    ResponseEntity<List<ServiceItem>> getAllServices();
+    ResponseEntity<List<ServiceDto>> getAllServices();
 
     @GetMapping("/id={service_id}")
-    ResponseEntity<ServiceItem> getServiceById( @PathVariable("service_id") int id );
+    ResponseEntity<ServiceDto> getServiceById( @PathVariable("service_id") int id );
 
     @GetMapping("/id={client_id}")
-    ResponseEntity<List<ServiceItem>> getServicesForClientWithId(@PathVariable("client_id") int clientId );
+    ResponseEntity<List<ServiceDto>> getServicesForClientWithId(@PathVariable("client_id") int clientId );
 
     @PostMapping
     ResponseEntity<Void> addService( @RequestBody ServiceDto ServiceDto );

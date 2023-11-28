@@ -36,7 +36,7 @@ public class ServiceItem {
     private ClientItem client;
 
     @ManyToMany
-    @JoinTable(name = "public.offense_service",
+    @JoinTable(name = "offense_service",
         joinColumns = { @JoinColumn(name = "service_id") },
         inverseJoinColumns = { @JoinColumn(name = "offense_id") })
     private List<OffenseItem> offenses;

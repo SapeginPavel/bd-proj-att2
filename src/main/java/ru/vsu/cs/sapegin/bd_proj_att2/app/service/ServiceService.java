@@ -11,7 +11,7 @@ public interface ServiceService {
 
     public List<ServiceItem> getServicesForClientWithId(int clientId);
 
-    public void addService(ServiceItem newService);
+    public void saveService(ServiceItem newService);
 
     public void updateService(int id, ServiceItem updatedServiceDto);
 
