@@ -12,18 +12,18 @@ public interface CarApi {
     @GetMapping
     ResponseEntity<List<CarDto>> getAllCars();
 
-    @GetMapping("id={car_id}")
+    @GetMapping("/id={car_id}")
     ResponseEntity<CarDto> getCarById( @PathVariable("car_id") int id );
 
-    @GetMapping("reg={regNum}")
+    @GetMapping("/reg={regNum}")
     ResponseEntity<List<CarDto>> getCarByRegNumber( @PathVariable("regNum") String regNum );
 
     @PostMapping
     ResponseEntity<Void> addCar( @RequestBody CarDto carDto );
 
-    @PutMapping
-    ResponseEntity<Void> updateCar( @RequestBody CarDto carDto );
+    @PutMapping("/id={car_id}")
+    ResponseEntity<Void> updateCar( @PathVariable("car_id") int id, @RequestBody CarDto carDto );
 
-    @DeleteMapping("id={car_id}")
-    ResponseEntity<Void> deleteCar( @PathVariable("car_id") int id);
+    @DeleteMapping("/id={car_id}")
+    ResponseEntity<Void> deleteCar( @PathVariable("car_id") int id );
 }

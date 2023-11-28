@@ -38,16 +38,22 @@ public class CarController implements CarApi {
 
     @Override
     public ResponseEntity<Void> addCar(CarDto carDto) {
-        return null;
+        CarItem carItem = CarMapper.INSTANCE.mapToItem(carDto);
+        carService.saveCar(carItem);
+        return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<Void> updateCar(CarDto carDto) {
-        return null;
+    public ResponseEntity<Void> updateCar(int id, CarDto carDto) {
+        CarItem updatedCar = carService.getCarById(id);
+        updatedCar.setReg_number(carDto.getReg_number());
+        carService.updateCar(id, updatedCar);
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Void> deleteCar(int id) {
-        return null;
+        carService.deleteCar(id);
+        return ResponseEntity.ok().build();
     }
 }

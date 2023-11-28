@@ -15,9 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OffenseItem {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int offense_id;
+
     private String problem;
     private int fine;
 

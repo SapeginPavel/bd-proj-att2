@@ -17,7 +17,7 @@ import java.util.List;
 public class CarItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int car_id;
 
     private String reg_number;

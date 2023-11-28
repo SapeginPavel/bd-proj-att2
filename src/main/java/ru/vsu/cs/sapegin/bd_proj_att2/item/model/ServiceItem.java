@@ -21,7 +21,7 @@ import java.util.List;
 public class ServiceItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int service_id;
 
     private Date startDate;

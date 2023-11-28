@@ -32,16 +32,16 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void saveCar(CarItem newCar) {
-
+        carRepository.saveAndFlush(newCar);
     }
 
     @Override
     public void updateCar(int id, CarItem updatedCar) {
-
+        saveCar(updatedCar);
     }
 
     @Override
     public void deleteCar(int id) {
-
+        carRepository.deleteById(id);
     }
 }
