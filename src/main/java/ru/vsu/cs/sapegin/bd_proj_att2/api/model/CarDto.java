@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class CarDto {
-    private int id;
+    private int car_id;
     private String reg_number;
     private String brand;
     private int year;

@@ -8,6 +8,7 @@ import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ClientMapper;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ClientServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
+import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
 import java.util.List;
 
@@ -45,7 +46,6 @@ public class ClientController implements ClientApi {
 
     @Override
     public ResponseEntity<Void> addClient(ClientDto clientDto) {
-        System.out.println(clientDto.getClient_id());
         ClientItem clientItem = ClientMapper.INSTANCE.mapToItem(clientDto);
         clientService.saveClient(clientItem);
         return ResponseEntity.ok().build();

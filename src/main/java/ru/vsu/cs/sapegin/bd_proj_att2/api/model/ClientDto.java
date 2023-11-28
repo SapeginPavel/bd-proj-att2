@@ -1,6 +1,5 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.api.model;
 
-import jakarta.persistence.MapKey;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +20,5 @@ public class ClientDto {
     private String name;
     private String phone;
 
-    private List<ServiceItem> services;
+//    private List<ServiceItem> services;
 }

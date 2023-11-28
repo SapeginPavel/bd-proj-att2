@@ -15,9 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarItem {
+
     @Id
     @GeneratedValue
     private int car_id;
+
     private String reg_number;
     private String brand;
     private int year;

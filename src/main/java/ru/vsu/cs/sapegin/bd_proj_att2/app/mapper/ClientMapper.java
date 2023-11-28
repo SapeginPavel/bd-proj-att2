@@ -16,5 +16,5 @@ public interface ClientMapper {
     ClientItem mapToItem(ClientDto dto);
     List<ClientItem> mapToItems(List<ClientDto> dtos);
 
-    //List<Target> sourceListToTargetList(List<Source> sourceList);
+//    List<Target> sourceListToTargetList(List<Source> sourceList);
 }

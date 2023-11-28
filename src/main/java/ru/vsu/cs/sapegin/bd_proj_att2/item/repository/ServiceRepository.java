@@ -1,4 +1,4 @@
-package ru.vsu.cs.sapegin.bd_proj_att2.item;
+package ru.vsu.cs.sapegin.bd_proj_att2.item.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

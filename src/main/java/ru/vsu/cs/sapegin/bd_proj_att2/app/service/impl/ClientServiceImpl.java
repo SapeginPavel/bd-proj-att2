@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ClientService;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.ClientRepository;
+import ru.vsu.cs.sapegin.bd_proj_att2.item.repository.ClientRepository;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 
 import java.util.List;
