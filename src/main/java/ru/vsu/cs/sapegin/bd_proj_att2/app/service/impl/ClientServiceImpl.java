@@ -1,9 +1,7 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ClientService;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.ClientRepository;
@@ -44,8 +42,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void updateClient(int id, ClientItem updatedClient) {
+    public void updateClient(ClientItem updatedClient) {
         //todo: нет нормального обновления
+        //Почему бы не сделать так: если у нас одинаковые везде операции, то можно сделать общий интерфейс, где будут "добавить", "обновить" и тд
+        clientRepository.saveAndFlush(updatedClient);
     }
 
     @Override

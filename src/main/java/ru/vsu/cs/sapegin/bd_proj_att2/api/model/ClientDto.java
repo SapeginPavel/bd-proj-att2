@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class ClientDto {
-    private int id;
+    private int client_id;
     private String passport_ser;
     private String passport_num;
     private String surname;

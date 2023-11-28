@@ -27,6 +27,9 @@ public class ClientController implements ClientApi {
     @Override
     public ResponseEntity<ClientDto> getClientById(int id) {
         ClientItem client = clientService.getClientById(id);
+        System.out.println("ВЫ БЕРЁТЕ ОДНОГО КЛИЕНТА");
+        System.out.println("Мой айди: " + client.getClient_id());
+        System.out.println("Айди после маппинга: " + ClientMapper.INSTANCE.mapToDto(client).getClient_id());
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(client));
     }
 
@@ -44,8 +47,13 @@ public class ClientController implements ClientApi {
 
     @Override
     public ResponseEntity<Void> addClient(ClientDto clientDto) {
+        System.out.println(clientDto.getClient_id());
+        System.out.println("Добавление клиента (айди сверху)");
         ClientItem clientItem = ClientMapper.INSTANCE.mapToItem(clientDto);
+        System.out.println("Произошёл маппинг");
         clientService.saveClient(clientItem);
+        System.out.println("Клиент добавлен");
+        System.out.println("Айди его: " + clientItem.getClient_id());
         return ResponseEntity.ok().build();
     }
 
@@ -60,7 +68,7 @@ public class ClientController implements ClientApi {
         currentClient.setPassport_num(updatedClient.getPassport_num());
         currentClient.setPassport_ser(updatedClient.getPassport_ser());
 
-        clientService.updateClient(id, updatedClient);
+        clientService.updateClient(updatedClient);
         return ResponseEntity.ok().build();
     }
 

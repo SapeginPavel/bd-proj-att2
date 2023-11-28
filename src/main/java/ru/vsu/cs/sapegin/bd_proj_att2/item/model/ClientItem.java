@@ -15,8 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ClientItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "client_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //IDENTITY - БД отвечает за генерацию ID
+//    @Column(name = "client_id")
     private int client_id;
 
     //Не используем @Column, так как названия совпадают с названиями в таблице
