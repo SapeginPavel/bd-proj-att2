@@ -26,12 +26,14 @@ public class CarController implements CarApi {
 
     @Override
     public ResponseEntity<CarDto> getCarById(int id) {
-        return null;
+        CarItem carItem = carService.getCarById(id);
+        return ResponseEntity.ok(CarMapper.INSTANCE.mapToDto(carItem));
     }
 
     @Override
-    public ResponseEntity<CarDto> getCarByRegNumber(String regNum) {
-        return null;
+    public ResponseEntity<List<CarDto>> getCarByRegNumber(String regNum) {
+        List<CarItem> carItems = carService.getCarByRegNumber(regNum);
+        return ResponseEntity.ok(CarMapper.INSTANCE.mapToDtos(carItems));
     }
 
     @Override

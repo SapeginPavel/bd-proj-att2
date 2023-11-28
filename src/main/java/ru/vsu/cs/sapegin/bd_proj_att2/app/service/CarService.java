@@ -9,7 +9,7 @@ public interface CarService {
 
     public CarItem getCarById(int id);
 
-    public CarItem getCarByRegNumber(String regNum);
+    public List<CarItem> getCarByRegNumber(String regNum);
 
     public void saveCar(CarItem newCar);
 

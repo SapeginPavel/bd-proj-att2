@@ -2,6 +2,7 @@ package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.CarService;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.CarItem;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.repository.CarRepository;
@@ -21,12 +22,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarItem getCarById(int id) {
-        return null;
+        return carRepository.findById(id).orElseThrow(() -> new NotFoundException("Car with this id not found"));
     }
 
     @Override
-    public CarItem getCarByRegNumber(String regNum) {
-        return null;
+    public List<CarItem> getCarByRegNumber(String regNum) {
+        return carRepository.findAll().stream().filter(carItem -> carItem.getReg_number().equals(regNum)).toList();
     }
 
     @Override

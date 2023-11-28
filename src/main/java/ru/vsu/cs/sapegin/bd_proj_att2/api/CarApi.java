@@ -16,7 +16,7 @@ public interface CarApi {
     ResponseEntity<CarDto> getCarById( @PathVariable("car_id") int id );
 
     @GetMapping("reg={regNum}")
-    ResponseEntity<CarDto> getCarByRegNumber( @PathVariable("regNum") String regNum );
+    ResponseEntity<List<CarDto>> getCarByRegNumber( @PathVariable("regNum") String regNum );
 
     @PostMapping
     ResponseEntity<Void> addCar( @RequestBody CarDto carDto );
