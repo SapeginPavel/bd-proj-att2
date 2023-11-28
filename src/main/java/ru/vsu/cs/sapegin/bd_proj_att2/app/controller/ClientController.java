@@ -19,7 +19,6 @@ public class ClientController implements ClientApi {
 
     @Override
     public ResponseEntity<List<ClientDto>> getAllClients() {
-        System.out.println("Немножко работает!");
         List<ClientItem> allClients = clientService.getAllClients();
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients)); //возвращает HTTP-ответ со статусом 200 и телом ответа, содержащим преобразованные объекты Dto
     }
@@ -27,16 +26,8 @@ public class ClientController implements ClientApi {
     @Override
     public ResponseEntity<ClientDto> getClientById(int id) {
         ClientItem client = clientService.getClientById(id);
-        System.out.println();
-        System.out.println("ВЫ БЕРЁТЕ ОДНОГО КЛИЕНТА");
-        System.out.println("Мой айди: " + client.getClient_id());
-        System.out.println(client);
-        System.out.println("Айди после маппинга: " + ClientMapper.INSTANCE.mapToDto(client).getClient_id());
         ClientDto clientDto = ClientMapper.INSTANCE.mapToDto(client);
-        System.out.println(clientDto);
         clientDto.setClient_id(10);
-        System.out.println(clientDto);
-        System.out.println(ClientMapper.INSTANCE.mapToItem(clientDto));
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(client));
     }
 
