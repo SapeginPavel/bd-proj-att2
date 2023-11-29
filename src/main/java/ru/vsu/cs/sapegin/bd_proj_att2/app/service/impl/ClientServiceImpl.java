@@ -1,6 +1,7 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ClientService;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
@@ -28,7 +29,10 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientItem> getClientsBySurname(String surname) {
-        return clientRepository.findAll().stream().filter(clientItem -> clientItem.getSurname().equals(surname)).collect(Collectors.toList()); //clientRepository.findBySurname(surname)
+        //root("название поля в dto") _ сделать эти спецификации в getAll _ проверяем, что не null _ делаем спецификации _ объединяем их в одну через "or", "and"
+        Specification<ClientItem> specification = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("surname"), surname);
+        return clientRepository.findAll(specification);
+//        return clientRepository.findAll().stream().filter(clientItem -> clientItem.getSurname().equals(surname)).collect(Collectors.toList()); //clientRepository.findBySurname(surname)
     }
 
     @Override

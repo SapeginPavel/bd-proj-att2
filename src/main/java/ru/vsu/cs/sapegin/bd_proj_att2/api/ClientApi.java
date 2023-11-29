@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/clients")
 public interface ClientApi {
     @GetMapping
-    ResponseEntity<List<ClientDto>> getAllClients();
+    ResponseEntity<List<ClientDto>> getAllClients(); //@RequestParam(required = false) String surname
 
     @GetMapping("/id={clientId}")
     ResponseEntity<ClientDto> getClientById( @PathVariable("clientId") int id );
