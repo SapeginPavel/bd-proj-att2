@@ -8,6 +8,7 @@ import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.repository.ClientRepository;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,26 +19,33 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
 
     @Override
-    public List<ClientItem> getAllClients() {
-        return clientRepository.findAll();
+    public List<ClientItem> getAllClients(String surname, String phone) {
+        List<Specification<ClientItem>> specifications = new ArrayList<>();
+        if (surname != null) {
+            Specification<ClientItem> specification = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("surname"), surname);
+            specifications.add(specification);
+        }
+        if (phone != null) {
+            Specification<ClientItem> specification = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("phone"), phone);
+            specifications.add(specification);
+        }
+
+        if (specifications.size() == 0) {
+            return clientRepository.findAll();
+        } else if (specifications.size() == 1) {
+            return clientRepository.findAll(specifications.get(0));
+        } else {
+            Specification<ClientItem> defaultSpec = specifications.get(0);
+            for (int i = 1; i < specifications.size(); i++) {
+                defaultSpec = defaultSpec.and(specifications.get(i));
+            }
+            return clientRepository.findAll(defaultSpec);
+        }
     }
 
     @Override
     public ClientItem getClientById(int id) {
         return clientRepository.findById(id).orElseThrow(() -> new NotFoundException("Client with this id not found"));
-    }
-
-    @Override
-    public List<ClientItem> getClientsBySurname(String surname) {
-        //root("название поля в dto") _ сделать эти спецификации в getAll _ проверяем, что не null _ делаем спецификации _ объединяем их в одну через "or", "and"
-        Specification<ClientItem> specification = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("surname"), surname);
-        return clientRepository.findAll(specification);
-//        return clientRepository.findAll().stream().filter(clientItem -> clientItem.getSurname().equals(surname)).collect(Collectors.toList()); //clientRepository.findBySurname(surname)
-    }
-
-    @Override
-    public List<ClientItem> getClientByPhone(String phone) {
-        return clientRepository.findAll().stream().filter(clientItem -> clientItem.getPhone().equals(phone)).toList();
     }
 
     @Override

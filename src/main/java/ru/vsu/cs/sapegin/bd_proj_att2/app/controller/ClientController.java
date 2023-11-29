@@ -18,9 +18,15 @@ public class ClientController implements ClientApi {
 
     private final ClientServiceImpl clientService;
 
+//    @Override
+//    public ResponseEntity<List<ClientDto>> getAllClients() {
+//        List<ClientItem> allClients = clientService.getAllClients();
+//        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients)); //возвращает HTTP-ответ со статусом 200 и телом ответа, содержащим преобразованные объекты Dto
+//    }
+
     @Override
-    public ResponseEntity<List<ClientDto>> getAllClients() {
-        List<ClientItem> allClients = clientService.getAllClients();
+    public ResponseEntity<List<ClientDto>> getAllClients(String surname, String phone) {
+        List<ClientItem> allClients = clientService.getAllClients(surname, phone);
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients)); //возвращает HTTP-ответ со статусом 200 и телом ответа, содержащим преобразованные объекты Dto
     }
 
@@ -32,17 +38,17 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(client));
     }
 
-    @Override
-    public ResponseEntity<List<ClientDto>> getClientBySurname(String surname) {
-        List<ClientItem> clients = clientService.getClientsBySurname(surname);
-        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(clients));
-    }
-
-    @Override
-    public ResponseEntity<List<ClientDto>> getClientByPhone(String phone) {
-        List<ClientItem> clients = clientService.getClientByPhone(phone);
-        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(clients));
-    }
+//    @Override
+//    public ResponseEntity<List<ClientDto>> getClientBySurname(String surname) {
+//        List<ClientItem> clients = clientService.getClientsBySurname(surname);
+//        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(clients));
+//    }
+//
+//    @Override
+//    public ResponseEntity<List<ClientDto>> getClientByPhone(String phone) {
+//        List<ClientItem> clients = clientService.getClientByPhone(phone);
+//        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(clients));
+//    }
 
     @Override
     public ResponseEntity<Void> addClient(ClientDto clientDto) {
