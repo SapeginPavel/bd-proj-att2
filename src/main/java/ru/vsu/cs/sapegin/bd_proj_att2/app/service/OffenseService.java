@@ -7,15 +7,15 @@ import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 import java.util.List;
 
 public interface OffenseService {
-    public List<ServiceItem> getAllServices();
+    List<OffenseItem> getAllOffenses();
 
-    public ServiceItem getServiceById(int id);
+    OffenseItem getOffenseById(int id);
 
-    public List<ServiceItem> getServicesForClientWithId(int clientId);
+    List<OffenseItem> getOffensesForClientWithId(int clientId);
 
-    public void addOffense(OffenseItem newOffense);
+    void addOffense(OffenseItem offenseItem);
 
-    public void updateOffense(int id, OffenseDto updatedServiceDto);
+    void updateOffense(int id, OffenseDto offenseDto);
 
-    public void deleteOffense(int id);
+    void deleteOffense(int id);
 }
