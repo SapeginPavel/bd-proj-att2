@@ -15,7 +15,7 @@ public interface OffenseService {
 
     void addOffense(OffenseItem offenseItem);
 
-    void updateOffense(int id, OffenseDto offenseDto);
+    void updateOffense(OffenseItem offenseItem);
 
     void deleteOffense(int id);
 }

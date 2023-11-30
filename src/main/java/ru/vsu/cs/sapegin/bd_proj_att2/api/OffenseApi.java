@@ -13,9 +13,9 @@ public interface OffenseApi {
     ResponseEntity<List<OffenseDto>> getAllOffenses();
 
     @GetMapping("/{offense_id}")
-    ResponseEntity<OffenseDto> getAllOffenses(@PathVariable("offense_id") int id);
+    ResponseEntity<OffenseDto> getOffenseById(@PathVariable("offense_id") int id);
 
-    @PostMapping("/{offense_id}")
+    @PostMapping()
     ResponseEntity<Void> addOffense(@RequestBody OffenseDto offenseDto);
 
     @PutMapping("/{offense_id}")

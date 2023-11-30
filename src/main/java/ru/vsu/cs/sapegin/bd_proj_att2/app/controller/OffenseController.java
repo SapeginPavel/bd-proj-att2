@@ -24,22 +24,38 @@ public class OffenseController implements OffenseApi {
     }
 
     @Override
-    public ResponseEntity<OffenseDto> getAllOffenses(int id) {
-        return null;
+    public ResponseEntity<OffenseDto> getOffenseById(int id) {
+        OffenseItem offenseItem = offenseService.getOffenseById(id);
+        return ResponseEntity.ok(OffenseMapper.INSTANCE.mapToDto(offenseItem));
     }
 
     @Override
     public ResponseEntity<Void> addOffense(OffenseDto offenseDto) {
-        return null;
+        OffenseItem offenseItem = OffenseMapper.INSTANCE.mapToItem(offenseDto);
+        offenseService.addOffense(offenseItem);
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Void> updateOffense(int id, OffenseDto offenseDto) {
-        return null;
+        OffenseItem currentOffenseItem = offenseService.getOffenseById(id);
+        if (offenseDto.getFine() != 0) {
+            currentOffenseItem.setFine(offenseDto.getFine());
+        }
+        if (offenseDto.getProblem() != null) {
+            currentOffenseItem.setProblem(offenseDto.getProblem());
+        }
+//        if (updatedServiceDto.getOffenses() != null) {
+//            List<OffenseItem> newOffenses = OffenseMapper.INSTANCE.mapToItems(updatedServiceDto.getOffenses());
+//            oldServiceItem.getOffenses().addAll(newOffenses);
+//        }
+        offenseService.updateOffense(currentOffenseItem);
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<OffenseDto> deleteOffense(int id) {
-        return null;
+        offenseService.deleteOffense(id);
+        return ResponseEntity.ok().build();
     }
 }
