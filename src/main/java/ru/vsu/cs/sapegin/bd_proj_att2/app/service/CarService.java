@@ -5,11 +5,11 @@ import ru.vsu.cs.sapegin.bd_proj_att2.item.model.CarItem;
 import java.util.List;
 
 public interface CarService {
-    public List<CarItem> getAllCars();
+    public List<CarItem> getAllCars(String regNum);
 
     public CarItem getCarById(int id);
 
-    public List<CarItem> getCarByRegNumber(String regNum);
+//    public List<CarItem> getCarByRegNumber(String regNum);
 
     public void saveCar(CarItem newCar);
 

@@ -1,6 +1,8 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.CarService;
@@ -16,7 +18,11 @@ public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
 
     @Override
-    public List<CarItem> getAllCars() {
+    public List<CarItem> getAllCars(String regNum) {
+        if (regNum != null) {
+            Specification<CarItem> specification = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("reg_number"), regNum);
+            return carRepository.findAll(specification);
+        }
         return carRepository.findAll();
     }
 
@@ -25,10 +31,10 @@ public class CarServiceImpl implements CarService {
         return carRepository.findById(id).orElseThrow(() -> new NotFoundException("Car with this id not found"));
     }
 
-    @Override
-    public List<CarItem> getCarByRegNumber(String regNum) {
-        return carRepository.findAll().stream().filter(carItem -> carItem.getReg_number().equals(regNum)).toList();
-    }
+//    @Override
+//    public List<CarItem> getCarByRegNumber(String regNum) {
+//        return carRepository.findAll().stream().filter(carItem -> carItem.getReg_number().equals(regNum)).toList();
+//    }
 
     @Override
     public void saveCar(CarItem newCar) {

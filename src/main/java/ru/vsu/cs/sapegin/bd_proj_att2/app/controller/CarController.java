@@ -13,14 +13,14 @@ import java.sql.SQLOutput;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor //нужен, чтобы спринг бут внедрил carService
+@RequiredArgsConstructor
 public class CarController implements CarApi {
 
     private final CarServiceImpl carService;
 
     @Override
-    public ResponseEntity<List<CarDto>> getAllCars() {
-        List<CarItem> allCars = carService.getAllCars();
+    public ResponseEntity<List<CarDto>> getAllCars(String regNum) {
+        List<CarItem> allCars = carService.getAllCars(regNum);
         return ResponseEntity.ok(CarMapper.INSTANCE.mapToDtos(allCars));
     }
 
@@ -29,12 +29,12 @@ public class CarController implements CarApi {
         CarItem carItem = carService.getCarById(id);
         return ResponseEntity.ok(CarMapper.INSTANCE.mapToDto(carItem));
     }
-
-    @Override
-    public ResponseEntity<List<CarDto>> getCarByRegNumber(String regNum) {
-        List<CarItem> carItems = carService.getCarByRegNumber(regNum);
-        return ResponseEntity.ok(CarMapper.INSTANCE.mapToDtos(carItems));
-    }
+//
+//    @Override
+//    public ResponseEntity<List<CarDto>> getCarByRegNumber(String regNum) {
+//        List<CarItem> carItems = carService.getCarByRegNumber(regNum);
+//        return ResponseEntity.ok(CarMapper.INSTANCE.mapToDtos(carItems));
+//    }
 
     @Override
     public ResponseEntity<Void> addCar(CarDto carDto) {
