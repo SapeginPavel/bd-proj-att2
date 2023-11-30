@@ -8,7 +8,6 @@ import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ClientMapper;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ClientServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
 import java.util.List;
 
@@ -42,16 +41,15 @@ public class ClientController implements ClientApi {
 
     @Override
     public ResponseEntity<Void> updateClient(int id, ClientDto clientDto) {
-        ClientItem updatedClient = ClientMapper.INSTANCE.mapToItem(clientDto);
 
         ClientItem currentClient = clientService.getClientById(id);
-        currentClient.setName(updatedClient.getName());
-        currentClient.setSurname(updatedClient.getSurname());
-        currentClient.setPhone(updatedClient.getPhone());
-        currentClient.setPassport_num(updatedClient.getPassport_num());
-        currentClient.setPassport_ser(updatedClient.getPassport_ser());
+        currentClient.setName(clientDto.getName());
+        currentClient.setSurname(clientDto.getSurname());
+        currentClient.setPhone(clientDto.getPhone());
+        currentClient.setPassport_num(clientDto.getPassport_num());
+        currentClient.setPassport_ser(clientDto.getPassport_ser());
 
-        clientService.updateClient(updatedClient);
+        clientService.updateClient(currentClient);
         return ResponseEntity.ok().build();
     }
 

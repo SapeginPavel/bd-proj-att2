@@ -35,5 +35,5 @@ public class ClientDto {
     @Size(min = 11, max = 11)
     private String phone;
 
-    private List<ServiceItem> services;
+//    private List<ServiceItem> services;
 }

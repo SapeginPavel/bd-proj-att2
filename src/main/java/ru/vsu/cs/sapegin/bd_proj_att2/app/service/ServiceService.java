@@ -5,15 +5,15 @@ import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 import java.util.List;
 
 public interface ServiceService {
-    public List<ServiceItem> getAllServices();
+    List<ServiceItem> getAllServices(Integer clientId);
 
-    public ServiceItem getServiceById(int id);
+    ServiceItem getServiceById(int id);
 
-    public List<ServiceItem> getServicesForClientWithId(int clientId);
+//    public List<ServiceItem> getServicesForClientWithId(int clientId);
 
-    public void saveService(ServiceItem newService);
+    void saveService(ServiceItem newService);
 
-    public void updateService(int id, ServiceItem updatedServiceDto);
+    void updateService(int id, ServiceItem updatedServiceDto);
 
-    public void deleteService(int id);
+    void deleteService(int id);
 }

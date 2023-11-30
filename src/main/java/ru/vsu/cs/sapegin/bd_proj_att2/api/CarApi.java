@@ -10,7 +10,7 @@ import java.util.List;
 public interface CarApi {
 
     @GetMapping
-    ResponseEntity<List<CarDto>> getAllCars( @RequestParam(required = false) String regNum );
+    ResponseEntity<List<CarDto>> getAllCars( @RequestParam(required = false) String reg );
 
     @GetMapping("/{car_id}")
     ResponseEntity<CarDto> getCarById( @PathVariable("car_id") int id );

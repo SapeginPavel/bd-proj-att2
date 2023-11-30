@@ -10,7 +10,6 @@ import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,8 +54,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void updateClient(ClientItem updatedClient) {
-        //todo: нет нормального обновления
-        //Почему бы не сделать так: если у нас одинаковые везде операции, то можно сделать общий интерфейс, где будут "добавить", "обновить" и тд
         clientRepository.saveAndFlush(updatedClient);
     }
 

@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +18,6 @@ public class CarDto {
     private String brand;
     private int year;
     private int cost;
+
+//    private List<ServiceItem> services;
 }

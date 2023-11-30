@@ -5,15 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.ServiceApi;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ServiceDto;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.CarMapper;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ClientMapper;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.OffenseMapper;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ServiceMapper;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.CarServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ClientServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ServiceServiceImpl;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.model.CarItem;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.OffenseItem;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
@@ -22,14 +18,13 @@ import java.util.List;
 @RestController("/services")
 @RequiredArgsConstructor
 public class ServiceController implements ServiceApi {
-
     private final ServiceServiceImpl serviceService;
     private final CarServiceImpl carService;
     private final ClientServiceImpl clientService;
 
     @Override
-    public ResponseEntity<List<ServiceDto>> getAllServices() {
-        List<ServiceItem> services = serviceService.getAllServices();
+    public ResponseEntity<List<ServiceDto>> getAllServices(Integer client_id) {
+        List<ServiceItem> services = serviceService.getAllServices(client_id);
         return ResponseEntity.ok(ServiceMapper.INSTANCE.mapToDtos(services));
     }
 
@@ -37,12 +32,6 @@ public class ServiceController implements ServiceApi {
     public ResponseEntity<ServiceDto> getServiceById(int id) {
         ServiceItem serviceItem = serviceService.getServiceById(id);
         return ResponseEntity.ok(ServiceMapper.INSTANCE.mapToDto(serviceItem));
-    }
-
-    @Override
-    public ResponseEntity<List<ServiceDto>> getServicesForClientWithId(int clientId) {
-        List<ServiceItem> serviceItems = serviceService.getServicesForClientWithId(clientId);
-        return ResponseEntity.ok(ServiceMapper.INSTANCE.mapToDtos(serviceItems));
     }
 
     @Override

@@ -19,8 +19,8 @@ public class CarController implements CarApi {
     private final CarServiceImpl carService;
 
     @Override
-    public ResponseEntity<List<CarDto>> getAllCars(String regNum) {
-        List<CarItem> allCars = carService.getAllCars(regNum);
+    public ResponseEntity<List<CarDto>> getAllCars(String reg) {
+        List<CarItem> allCars = carService.getAllCars(reg);
         return ResponseEntity.ok(CarMapper.INSTANCE.mapToDtos(allCars));
     }
 
@@ -29,12 +29,6 @@ public class CarController implements CarApi {
         CarItem carItem = carService.getCarById(id);
         return ResponseEntity.ok(CarMapper.INSTANCE.mapToDto(carItem));
     }
-//
-//    @Override
-//    public ResponseEntity<List<CarDto>> getCarByRegNumber(String regNum) {
-//        List<CarItem> carItems = carService.getCarByRegNumber(regNum);
-//        return ResponseEntity.ok(CarMapper.INSTANCE.mapToDtos(carItems));
-//    }
 
     @Override
     public ResponseEntity<Void> addCar(CarDto carDto) {
@@ -47,6 +41,7 @@ public class CarController implements CarApi {
     public ResponseEntity<Void> updateCar(int id, CarDto carDto) {
         CarItem updatedCar = carService.getCarById(id);
         updatedCar.setReg_number(carDto.getReg_number());
+        updatedCar.setCost(carDto.getCost());
         carService.updateCar(id, updatedCar);
         return ResponseEntity.ok().build();
     }

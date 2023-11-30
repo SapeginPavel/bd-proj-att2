@@ -1,5 +1,8 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.item.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +26,7 @@ public class OffenseItem {
     private String problem;
     private int fine;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "offenses")
     private List<ServiceItem> services;
 }

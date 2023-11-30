@@ -2,7 +2,6 @@ package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.CarService;
@@ -30,11 +29,6 @@ public class CarServiceImpl implements CarService {
     public CarItem getCarById(int id) {
         return carRepository.findById(id).orElseThrow(() -> new NotFoundException("Car with this id not found"));
     }
-
-//    @Override
-//    public List<CarItem> getCarByRegNumber(String regNum) {
-//        return carRepository.findAll().stream().filter(carItem -> carItem.getReg_number().equals(regNum)).toList();
-//    }
 
     @Override
     public void saveCar(CarItem newCar) {

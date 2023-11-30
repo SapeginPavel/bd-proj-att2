@@ -2,9 +2,7 @@ package ru.vsu.cs.sapegin.bd_proj_att2.api;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vsu.cs.sapegin.bd_proj_att2.api.model.OffenseDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ServiceDto;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
 import java.util.List;
 
@@ -12,20 +10,17 @@ import java.util.List;
 public interface ServiceApi {
 
     @GetMapping
-    ResponseEntity<List<ServiceDto>> getAllServices();
+    ResponseEntity<List<ServiceDto>> getAllServices( @RequestParam(required = false) Integer client_id);
 
-    @GetMapping("/id={service_id}")
+    @GetMapping("/{service_id}")
     ResponseEntity<ServiceDto> getServiceById( @PathVariable("service_id") int id );
-
-    @GetMapping("/client_id={client_id}")
-    ResponseEntity<List<ServiceDto>> getServicesForClientWithId( @PathVariable("client_id") int clientId );
 
     @PostMapping
     ResponseEntity<Void> addService( @RequestBody ServiceDto ServiceDto );
 
-    @PutMapping("/id={service_id}")
+    @PutMapping("/{service_id}")
     ResponseEntity<Void> updateService( @PathVariable("service_id") int id, @RequestBody ServiceDto updatedServiceDto);
 
-    @DeleteMapping("id={service_id}")
+    @DeleteMapping("{service_id}")
     ResponseEntity<Void> deleteService( @PathVariable("service_id") int id);
 }
