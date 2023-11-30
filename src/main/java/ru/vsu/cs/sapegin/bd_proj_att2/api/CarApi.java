@@ -10,20 +10,17 @@ import java.util.List;
 public interface CarApi {
 
     @GetMapping
-    ResponseEntity<List<CarDto>> getAllCars();
+    ResponseEntity<List<CarDto>> getAllCars( @RequestParam(required = false) String regNum );
 
-    @GetMapping("/id={car_id}")
+    @GetMapping("/{car_id}")
     ResponseEntity<CarDto> getCarById( @PathVariable("car_id") int id );
-
-    @GetMapping("/reg={regNum}")
-    ResponseEntity<List<CarDto>> getCarByRegNumber( @PathVariable("regNum") String regNum );
 
     @PostMapping
     ResponseEntity<Void> addCar( @RequestBody CarDto carDto );
 
-    @PutMapping("/id={car_id}")
+    @PutMapping("/{car_id}")
     ResponseEntity<Void> updateCar( @PathVariable("car_id") int id, @RequestBody CarDto carDto );
 
-    @DeleteMapping("/id={car_id}")
+    @DeleteMapping("/{car_id}")
     ResponseEntity<Void> deleteCar( @PathVariable("car_id") int id );
 }

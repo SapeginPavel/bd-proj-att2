@@ -14,12 +14,6 @@ public interface ClientApi {
     @GetMapping("/{clientId}")
     ResponseEntity<ClientDto> getClientById( @PathVariable("clientId") int id );
 
-//    @GetMapping("/surname={surname}")
-//    ResponseEntity<List<ClientDto>> getClientBySurname( @PathVariable("surname") String surname );
-//
-//    @GetMapping("/phone={phone}")
-//    ResponseEntity<List<ClientDto>> getClientByPhone( @PathVariable("phone") String phone );
-
     @PostMapping()
     ResponseEntity<Void> addClient( @RequestBody ClientDto clientDto );
 

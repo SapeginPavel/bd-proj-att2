@@ -23,11 +23,8 @@ public class ClientItem {
     private String passport_num;
     private String surname;
 
-    @NotEmpty(message = "Name must not me empty")
-    @Size(min = 2, max = 30, message = "Incorrect length of the name") //перенести в ДТО, сделать валидацию на уровне front (главное) - регулярка на формочке
     private String name;
 
-    @Size(min = 11, max = 11)
     private String phone;
 
     @OneToMany(mappedBy = "client") //название поля, которое сюда ссылается

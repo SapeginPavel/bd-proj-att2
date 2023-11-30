@@ -10,10 +10,6 @@ public interface ClientService {
     List<ClientItem> getAllClients(String surname, String phone);
     ClientItem getClientById(int id);
 
-//    List<ClientItem> getClientsBySurname(String surname);
-//
-//    List<ClientItem> getClientByPhone(String phone);
-
     void saveClient(ClientItem clientItem);
 
     void updateClient(ClientItem clientItem);
