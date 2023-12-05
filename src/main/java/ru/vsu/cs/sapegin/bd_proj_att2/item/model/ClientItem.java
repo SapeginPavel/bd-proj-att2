@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "client_id")
 public class ClientItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //IDENTITY - БД отвечает за генерацию ID
     private int client_id;
@@ -28,6 +30,7 @@ public class ClientItem {
     private String name;
 
     private String phone;
+
     @JsonIgnore
     @OneToMany(mappedBy = "client") //название поля, которое сюда ссылается
     private List<ServiceItem> services;

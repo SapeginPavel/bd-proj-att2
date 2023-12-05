@@ -6,9 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +13,7 @@ import java.util.List;
 @Data
 public class ClientDto {
 
+//    @JsonView(Views.ForClient.class)
     private int client_id;
 
     @Size(min = 4, max = 4)
@@ -30,6 +28,7 @@ public class ClientDto {
 
     @NotEmpty(message = "Name must not me empty")
     @Size(min = 2, max = 30, message = "Incorrect length of the name")
+//    @JsonView(Views.ForClient.class)
     private String name;
 
     @Size(min = 11, max = 11)

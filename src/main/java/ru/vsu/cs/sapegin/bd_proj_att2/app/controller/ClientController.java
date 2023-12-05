@@ -1,10 +1,12 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.ClientApi;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ClientMapper;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ClientServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
@@ -18,6 +20,7 @@ public class ClientController implements ClientApi {
     //todo: сделать защиту, чтобы нельзя было ввести неправильно dto
     private final ClientServiceImpl clientService;
 
+//    @JsonView(Views.ForClient.class)
     @Override
     public ResponseEntity<List<ClientDto>> getAllClients(String surname, String phone) {
         List<ClientItem> allClients = clientService.getAllClients(surname, phone);
@@ -34,13 +37,16 @@ public class ClientController implements ClientApi {
 
     @Override
     public ResponseEntity<Void> addClient(ClientDto clientDto) {
+        System.out.println(clientDto);
         ClientItem clientItem = ClientMapper.INSTANCE.mapToItem(clientDto);
         clientService.saveClient(clientItem);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build(); //лучше возвращать
     }
 
     @Override
     public ResponseEntity<Void> updateClient(int id, ClientDto clientDto) {
+
+        System.out.println(clientDto);
 
         ClientItem currentClient = clientService.getClientById(id);
         currentClient.setName(clientDto.getName());
@@ -49,7 +55,9 @@ public class ClientController implements ClientApi {
         currentClient.setPassport_num(clientDto.getPassport_num());
         currentClient.setPassport_ser(clientDto.getPassport_ser());
 
+        System.out.println("Вроде обновилось");
         clientService.updateClient(currentClient);
+
         return ResponseEntity.ok().build();
     }
 
