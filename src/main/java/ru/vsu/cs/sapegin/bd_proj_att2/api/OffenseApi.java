@@ -16,10 +16,10 @@ public interface OffenseApi {
     ResponseEntity<OffenseDto> getOffenseById(@PathVariable("offense_id") int id);
 
     @PostMapping()
-    ResponseEntity<Void> addOffense(@RequestBody OffenseDto offenseDto);
+    ResponseEntity<OffenseDto> addOffense(@RequestBody OffenseDto offenseDto);
 
     @PutMapping("/{offense_id}")
-    ResponseEntity<Void> updateOffense(@PathVariable("offense_id") int id, @RequestBody OffenseDto offenseDto);
+    ResponseEntity<OffenseDto> updateOffense(@PathVariable("offense_id") int id, @RequestBody OffenseDto offenseDto);
 
     @DeleteMapping("/{offense_id}")
     ResponseEntity<OffenseDto> deleteOffense(@PathVariable("offense_id") int id);

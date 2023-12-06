@@ -1,8 +1,6 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.item.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "offense_id")
 public class OffenseItem {
 
     @Id
@@ -26,7 +25,7 @@ public class OffenseItem {
     private String problem;
     private int fine;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToMany(mappedBy = "offenses")
     private List<ServiceItem> services;
 }

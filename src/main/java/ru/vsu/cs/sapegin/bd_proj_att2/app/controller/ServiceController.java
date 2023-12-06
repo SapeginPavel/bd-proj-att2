@@ -35,16 +35,16 @@ public class ServiceController implements ServiceApi {
     }
 
     @Override
-    public ResponseEntity<Void> addService(ServiceDto serviceDto) {
+    public ResponseEntity<ServiceDto> addService(ServiceDto serviceDto) {
         ServiceItem newService = ServiceMapper.INSTANCE.mapToItem(serviceDto);
         newService.setCar(carService.getCarById(serviceDto.getCar().getCar_id()));
         newService.setClient(clientService.getClientById(serviceDto.getClient().getClient_id()));
         serviceService.saveService(newService);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ServiceMapper.INSTANCE.mapToDto(newService));
     }
 
     @Override
-    public ResponseEntity<Void> updateService(int id, ServiceDto updatedServiceDto) {
+    public ResponseEntity<ServiceDto> updateService(int id, ServiceDto updatedServiceDto) {
         ServiceItem oldServiceItem = serviceService.getServiceById(id);
 
         if (updatedServiceDto.getStartDate() != null) {
@@ -67,7 +67,7 @@ public class ServiceController implements ServiceApi {
         }
 
         serviceService.updateService(id, oldServiceItem);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ServiceMapper.INSTANCE.mapToDto(oldServiceItem));
     }
 
     @Override

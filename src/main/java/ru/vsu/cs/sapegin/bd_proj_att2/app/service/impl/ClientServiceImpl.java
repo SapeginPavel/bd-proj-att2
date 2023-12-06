@@ -1,8 +1,10 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.ClientService;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.exception.NotFoundException;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.repository.ClientRepository;
@@ -44,6 +46,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientItem getClientById(int id) {
+        System.out.println("нуу");
         return clientRepository.findById(id).orElseThrow(() -> new NotFoundException("Client with this id not found"));
     }
 

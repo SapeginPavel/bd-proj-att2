@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.ClientApi;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
+import ru.vsu.cs.sapegin.bd_proj_att2.api.model.special.ClientDtoServicesAsId;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ClientMapper;
+import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.special.ClientMapperSpecial;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ClientServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 
@@ -27,26 +29,28 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients)); //возвращает HTTP-ответ со статусом 200 и телом ответа, содержащим преобразованные объекты Dto
     }
 
+//    @JsonView(Views.ForClient.class)
     @Override
     public ResponseEntity<ClientDto> getClientById(int id) {
+        System.out.println("Хотя бы зашли");
         ClientItem client = clientService.getClientById(id);
-        ClientDto clientDto = ClientMapper.INSTANCE.mapToDto(client);
-        clientDto.setClient_id(10);
+        System.out.println("Вытащили из БД: " + client);
+        System.out.println("После маппинга: " + ClientMapper.INSTANCE.mapToDto(client));
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(client));
     }
 
     @Override
-    public ResponseEntity<Void> addClient(ClientDto clientDto) {
-        System.out.println(clientDto);
+    public ResponseEntity<ClientDto> addClient(ClientDto clientDto) {
+        System.out.println("Добавляем в базу: " + clientDto);
         ClientItem clientItem = ClientMapper.INSTANCE.mapToItem(clientDto);
         clientService.saveClient(clientItem);
-        return ResponseEntity.ok().build(); //лучше возвращать
+        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(clientItem));
     }
 
     @Override
-    public ResponseEntity<Void> updateClient(int id, ClientDto clientDto) {
+    public ResponseEntity<ClientDto> updateClient(int id, ClientDto clientDto) {
 
-        System.out.println(clientDto);
+        System.out.println("Пришло для обновления: " + clientDto);
 
         ClientItem currentClient = clientService.getClientById(id);
         currentClient.setName(clientDto.getName());
@@ -55,10 +59,9 @@ public class ClientController implements ClientApi {
         currentClient.setPassport_num(clientDto.getPassport_num());
         currentClient.setPassport_ser(clientDto.getPassport_ser());
 
-        System.out.println("Вроде обновилось");
         clientService.updateClient(currentClient);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(currentClient));
     }
 
     @Override

@@ -16,10 +16,10 @@ public interface ServiceApi {
     ResponseEntity<ServiceDto> getServiceById( @PathVariable("service_id") int id );
 
     @PostMapping
-    ResponseEntity<Void> addService( @RequestBody ServiceDto ServiceDto );
+    ResponseEntity<ServiceDto> addService( @RequestBody ServiceDto ServiceDto );
 
     @PutMapping("/{service_id}")
-    ResponseEntity<Void> updateService( @PathVariable("service_id") int id, @RequestBody ServiceDto updatedServiceDto);
+    ResponseEntity<ServiceDto> updateService( @PathVariable("service_id") int id, @RequestBody ServiceDto updatedServiceDto);
 
     @DeleteMapping("{service_id}")
     ResponseEntity<Void> deleteService( @PathVariable("service_id") int id);

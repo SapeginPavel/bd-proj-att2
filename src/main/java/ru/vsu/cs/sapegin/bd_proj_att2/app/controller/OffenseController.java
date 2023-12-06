@@ -30,14 +30,14 @@ public class OffenseController implements OffenseApi {
     }
 
     @Override
-    public ResponseEntity<Void> addOffense(OffenseDto offenseDto) {
+    public ResponseEntity<OffenseDto> addOffense(OffenseDto offenseDto) {
         OffenseItem offenseItem = OffenseMapper.INSTANCE.mapToItem(offenseDto);
         offenseService.addOffense(offenseItem);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(OffenseMapper.INSTANCE.mapToDto(offenseItem));
     }
 
     @Override
-    public ResponseEntity<Void> updateOffense(int id, OffenseDto offenseDto) {
+    public ResponseEntity<OffenseDto> updateOffense(int id, OffenseDto offenseDto) {
         OffenseItem currentOffenseItem = offenseService.getOffenseById(id);
         if (offenseDto.getFine() != 0) {
             currentOffenseItem.setFine(offenseDto.getFine());
@@ -50,7 +50,7 @@ public class OffenseController implements OffenseApi {
 //            oldServiceItem.getOffenses().addAll(newOffenses);
 //        }
         offenseService.updateOffense(currentOffenseItem);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(OffenseMapper.INSTANCE.mapToDto(currentOffenseItem));
     }
 
     @Override

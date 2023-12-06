@@ -16,10 +16,10 @@ public interface CarApi {
     ResponseEntity<CarDto> getCarById( @PathVariable("car_id") int id );
 
     @PostMapping
-    ResponseEntity<Void> addCar( @RequestBody CarDto carDto );
+    ResponseEntity<CarDto> addCar( @RequestBody CarDto carDto );
 
     @PutMapping("/{car_id}")
-    ResponseEntity<Void> updateCar( @PathVariable("car_id") int id, @RequestBody CarDto carDto );
+    ResponseEntity<CarDto> updateCar( @PathVariable("car_id") int id, @RequestBody CarDto carDto );
 
     @DeleteMapping("/{car_id}")
     ResponseEntity<Void> deleteCar( @PathVariable("car_id") int id );
