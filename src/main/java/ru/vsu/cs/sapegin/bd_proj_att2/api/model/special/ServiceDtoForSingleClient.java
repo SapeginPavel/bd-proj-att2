@@ -1,8 +1,9 @@
-package ru.vsu.cs.sapegin.bd_proj_att2.api.model;
+package ru.vsu.cs.sapegin.bd_proj_att2.api.model.special;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
+import ru.vsu.cs.sapegin.bd_proj_att2.api.model.CarDto;
+import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
+import ru.vsu.cs.sapegin.bd_proj_att2.api.model.OffenseDto;
 
 import java.util.Date;
 import java.util.List;
@@ -14,19 +15,14 @@ import java.util.List;
 @Setter
 @Getter
 @EqualsAndHashCode
-public class ServiceDto {
-
+public class ServiceDtoForSingleClient {
     private int service_id;
 
     private Date startDate;
 
     private Date endDate;
 
-    private CarDto car;
-
-    private ClientDto client;
-
-    private List<OffenseDto> offenses;
+    private int car_id;
 
     @Override
     public String toString() {
@@ -34,9 +30,7 @@ public class ServiceDto {
                 "service_id=" + service_id +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                ", car_id=" + car.getCar_id() +
-                ", client_id=" + client.getClient_id() +
-                ", offenses=" + offenses +
+                ", car_id=" + car_id +
                 '}';
     }
 }

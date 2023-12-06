@@ -1,11 +1,8 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.api;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
-import ru.vsu.cs.sapegin.bd_proj_att2.api.model.special.ClientDtoServicesAsId;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
 
 import java.util.List;
 

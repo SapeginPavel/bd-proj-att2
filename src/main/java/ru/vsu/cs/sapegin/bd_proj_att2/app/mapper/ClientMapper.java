@@ -5,23 +5,46 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
+import ru.vsu.cs.sapegin.bd_proj_att2.api.model.special.ServiceDtoForSingleClient;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Mapper
 public interface ClientMapper {
     ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
-    @Mapping(target = "services_id", source = "services", qualifiedByName = "mapToIdList")
+//    @Mapping(target = "services_id", source = "services", qualifiedByName = "mapToIdList")
+    @Mapping(target = "serviceDtoForSingleClients", source = "services", qualifiedByName = "mapToCustomList")
     @Mapping(ignore = true, target = "services")
     ClientDto mapToDto(ClientItem item);
 
-    @Named("mapToIdList")
-    static List<Integer> mapToIdList(List<ServiceItem> services) {
-//        System.out.println("пытаемся мапить кастомно");
-        return services.stream().map(ServiceItem::getService_id).toList();
+//    @Named("mapToIdList")
+//    static List<Integer> mapToIdList(List<ServiceItem> services) {
+//        return services.stream().map(ServiceItem::getService_id).toList();
+//    }
+
+    @Named("mapToCustomList")
+    static List<ServiceDtoForSingleClient> mapToCustomList(List<ServiceItem> services) {
+        if (services == null) {
+            return null;
+        }
+        services.sort(new Comparator<ServiceItem>() {
+            @Override
+            public int compare(ServiceItem o1, ServiceItem o2) {
+                return o1.getService_id() - o2.getService_id();
+            }
+        });
+        List<ServiceDtoForSingleClient> customServices = new ArrayList<>();
+        for (ServiceItem s : services) {
+            customServices.add(new ServiceDtoForSingleClient(
+                    s.getService_id(), s.getStartDate(), s.getEndDate(), s.getCar().getCar_id()
+            ));
+        }
+        return customServices;
     }
 
     @Mapping(ignore = true, target = "services")

@@ -1,15 +1,11 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.ClientApi;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
-import ru.vsu.cs.sapegin.bd_proj_att2.api.model.special.ClientDtoServicesAsId;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.ClientMapper;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.mapper.special.ClientMapperSpecial;
 import ru.vsu.cs.sapegin.bd_proj_att2.app.service.impl.ClientServiceImpl;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
 
