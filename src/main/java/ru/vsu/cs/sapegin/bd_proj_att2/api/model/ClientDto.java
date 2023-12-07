@@ -1,6 +1,7 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.api.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -25,15 +26,17 @@ public class ClientDto {
     @Size(min = 6, max = 6)
     private String passport_num;
 
-    @NotEmpty(message = "Name must not me empty")
+//    @NotEmpty(message = "Name must not me empty")
     @Size(min = 2, max = 30, message = "Incorrect length of the name")
     private String surname;
 
-    @NotEmpty(message = "Name must not me empty")
+//    @NotEmpty(message = "Name must not me empty")
     @Size(min = 2, max = 30, message = "Incorrect length of the name")
     private String name;
 
     @Size(min = 11, max = 11)
+//    @Min(11)
+//    @Max(11)
     private String phone;
 
     //Пока в этом поле смысла нет (в основном, так как зацикливает и содержит объективно лишнюю инфу)

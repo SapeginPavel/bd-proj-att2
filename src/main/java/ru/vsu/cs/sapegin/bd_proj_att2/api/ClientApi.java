@@ -1,5 +1,6 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
@@ -16,10 +17,10 @@ public interface ClientApi {
     ResponseEntity<ClientDto> getClientById(@PathVariable("clientId") int id );
 
     @PostMapping()
-    ResponseEntity<ClientDto> addClient( @RequestBody ClientDto clientDto );
+    ResponseEntity<ClientDto> addClient( @Valid @RequestBody ClientDto clientDto );
 
     @PutMapping("/{clientId}")
-    ResponseEntity<ClientDto> updateClient( @PathVariable("clientId") int id, @RequestBody ClientDto clientDto );
+    ResponseEntity<ClientDto> updateClient( @PathVariable("clientId") int id, @Valid @RequestBody ClientDto clientDto );
 
     @DeleteMapping("/{clientId}")
     ResponseEntity<Void> deleteClient( @PathVariable("clientId") int id );

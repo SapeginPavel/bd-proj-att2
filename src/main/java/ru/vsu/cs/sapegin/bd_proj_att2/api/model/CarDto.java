@@ -15,15 +15,10 @@ import java.util.List;
 @Builder
 @Data
 public class CarDto {
-//    @JsonView(Views.ForClient.class)
     private int car_id;
-//    @JsonView(Views.Other.class)
     private String reg_number;
-//    @JsonView(Views.Other.class)
     private String brand;
-//    @JsonView(Views.Other.class)
     private int year;
-//    @JsonView(Views.Other.class)
     private int cost;
 
     private List<ServiceDto> services;

@@ -25,19 +25,14 @@ public class ClientController implements ClientApi {
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients)); //возвращает HTTP-ответ со статусом 200 и телом ответа, содержащим преобразованные объекты Dto
     }
 
-//    @JsonView(Views.ForClient.class)
     @Override
     public ResponseEntity<ClientDto> getClientById(int id) {
-        System.out.println("Хотя бы зашли");
         ClientItem client = clientService.getClientById(id);
-        System.out.println("Вытащили из БД: " + client);
-        System.out.println("После маппинга: " + ClientMapper.INSTANCE.mapToDto(client));
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(client));
     }
 
     @Override
     public ResponseEntity<ClientDto> addClient(ClientDto clientDto) {
-        System.out.println("Добавляем в базу: " + clientDto);
         ClientItem clientItem = ClientMapper.INSTANCE.mapToItem(clientDto);
         clientService.saveClient(clientItem);
         return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDto(clientItem));
@@ -45,8 +40,6 @@ public class ClientController implements ClientApi {
 
     @Override
     public ResponseEntity<ClientDto> updateClient(int id, ClientDto clientDto) {
-
-        System.out.println("Пришло для обновления: " + clientDto);
 
         ClientItem currentClient = clientService.getClientById(id);
         currentClient.setName(clientDto.getName());

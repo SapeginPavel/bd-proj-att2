@@ -1,8 +1,6 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.api.model;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
 
 import java.util.Date;
 import java.util.List;

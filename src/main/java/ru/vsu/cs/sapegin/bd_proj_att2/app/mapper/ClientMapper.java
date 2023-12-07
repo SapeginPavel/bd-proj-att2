@@ -17,15 +17,9 @@ import java.util.List;
 public interface ClientMapper {
     ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
-//    @Mapping(target = "services_id", source = "services", qualifiedByName = "mapToIdList")
     @Mapping(target = "serviceDtoForSingleClients", source = "services", qualifiedByName = "mapToCustomList")
     @Mapping(ignore = true, target = "services")
     ClientDto mapToDto(ClientItem item);
-
-//    @Named("mapToIdList")
-//    static List<Integer> mapToIdList(List<ServiceItem> services) {
-//        return services.stream().map(ServiceItem::getService_id).toList();
-//    }
 
     @Named("mapToCustomList")
     static List<ServiceDtoForSingleClient> mapToCustomList(List<ServiceItem> services) {
