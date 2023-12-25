@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.special.ServiceDtoForSingleClient;
 
 import java.util.List;
@@ -28,11 +26,9 @@ public class ClientDto {
     @Size(min = 6, max = 6)
     private String passport_num;
 
-//    @NotEmpty(message = "Name must not me empty")
     @Size(min = 2, max = 30, message = "Incorrect length of the name")
     private String surname;
 
-//    @NotEmpty(message = "Name must not me empty")
     @Size(min = 2, max = 30, message = "Incorrect length of the name")
     private String name;
 
@@ -45,5 +41,7 @@ public class ClientDto {
 //    private List<Integer> services_id;
 
     private List<ServiceDtoForSingleClient> serviceDtoForSingleClients;
+
+    private boolean hasNextPageForPagination;
 
 }

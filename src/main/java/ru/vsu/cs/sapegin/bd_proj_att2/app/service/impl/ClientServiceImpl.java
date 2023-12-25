@@ -22,7 +22,7 @@ public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
 
     @Override
-    public List<ClientItem> getAllClients(String surname, String phone, Integer offset, Integer limit) {
+    public List<ClientItem> getAllClientsWithPagination(String surname, String phone, Integer offset, Integer limit) {
         List<Specification<ClientItem>> specifications = new ArrayList<>();
         if (surname != null) {
             Specification<ClientItem> specification = (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("surname"), surname);
@@ -45,7 +45,9 @@ public class ClientServiceImpl implements ClientService {
             for (int i = 1; i < specifications.size(); i++) {
                 defaultSpec = defaultSpec.and(specifications.get(i));
             }
-            return clientRepository.findAll(defaultSpec, PageRequest.of(offset, limit, Sort.by(Sort.Direction.ASC, "clientId"))).stream().toList();
+            PageRequest preq = PageRequest.of(offset, limit, Sort.by(Sort.Direction.ASC, "clientId"));
+            System.out.println(preq.next() == null);
+            return clientRepository.findAll(defaultSpec, preq).stream().toList();
         }
     }
 

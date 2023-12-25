@@ -1,13 +1,11 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.app.service;
 
-import ru.vsu.cs.sapegin.bd_proj_att2.api.model.ClientDto;
 import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ClientItem;
-import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 
 import java.util.List;
 
 public interface ClientService {
-    List<ClientItem> getAllClients(String surname, String phone, Integer offset, Integer limit);
+    List<ClientItem> getAllClientsWithPagination(String surname, String phone, Integer offset, Integer limit);
     ClientItem getClientById(int id);
 
     void saveClient(ClientItem clientItem);

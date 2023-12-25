@@ -14,14 +14,16 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ClientController implements ClientApi {
-
-    //todo: сделать защиту, чтобы нельзя было ввести неправильно dto
     private final ClientServiceImpl clientService;
 
     @Override
     public ResponseEntity<List<ClientDto>> getAllClients(String surname, String phone, Integer offset, Integer limit) {
-        List<ClientItem> allClients = clientService.getAllClients(surname, phone, offset, limit);
-        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients));
+        List<ClientItem> allClients = clientService.getAllClientsWithPagination(surname, phone, offset, limit);
+        List<ClientDto> clientDtos = ClientMapper.INSTANCE.mapToDtos(allClients);
+        //ClientDto last = clientDtos.get(clientDtos.size() - 1);
+
+        //last.setHasNextPageForPagination(true);
+        return ResponseEntity.ok(clientDtos);
     }
 
     @Override
