@@ -19,10 +19,11 @@ public interface ClientMapper {
 
     @Mapping(target = "serviceDtoForSingleClients", source = "services", qualifiedByName = "mapToCustomList")
     @Mapping(ignore = true, target = "services")
+    @Mapping(target = "client_id", source = "clientId")
     ClientDto mapToDto(ClientItem item);
 
     @Named("mapToCustomList")
-    static List<ServiceDtoForSingleClient> mapToCustomList(List<ServiceItem> services) {
+    static List<ServiceDtoForSingleClient> mapToCustomDtoList(List<ServiceItem> services) {
         if (services == null) {
             return null;
         }
@@ -42,10 +43,13 @@ public interface ClientMapper {
     }
 
     @Mapping(ignore = true, target = "services")
-
+    @Mapping(target = "client_id", source = "clientId")
     List<ClientDto> mapToDtos(List<ClientItem> items);
 
+    @Mapping(target = "clientId", source = "client_id")
     ClientItem mapToItem(ClientDto dto);
+
+    @Mapping(target = "clientId", source = "client_id")
     List<ClientItem> mapToItems(List<ClientDto> dtos);
 
 }

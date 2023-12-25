@@ -7,7 +7,7 @@ import ru.vsu.cs.sapegin.bd_proj_att2.item.model.ServiceItem;
 import java.util.List;
 
 public interface ClientService {
-    List<ClientItem> getAllClients(String surname, String phone);
+    List<ClientItem> getAllClients(String surname, String phone, Integer offset, Integer limit);
     ClientItem getClientById(int id);
 
     void saveClient(ClientItem clientItem);

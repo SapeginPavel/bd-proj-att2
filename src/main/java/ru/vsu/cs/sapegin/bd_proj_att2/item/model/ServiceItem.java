@@ -1,11 +1,7 @@
 package ru.vsu.cs.sapegin.bd_proj_att2.item.model;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.*;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.Views;
-import ru.vsu.cs.sapegin.bd_proj_att2.app.serializers.ServicesSerializer;
 
 import java.util.Date;
 import java.util.List;
@@ -61,7 +57,7 @@ public class ServiceItem {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", car_id=" + car.getCar_id() +
-                ", client_id=" + client.getClient_id() +
+                ", client_id=" + client.getClientId() +
                 ", offenses=" + offenses +
                 '}';
     }

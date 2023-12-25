@@ -18,11 +18,10 @@ public class ClientController implements ClientApi {
     //todo: сделать защиту, чтобы нельзя было ввести неправильно dto
     private final ClientServiceImpl clientService;
 
-//    @JsonView(Views.ForClient.class)
     @Override
-    public ResponseEntity<List<ClientDto>> getAllClients(String surname, String phone) {
-        List<ClientItem> allClients = clientService.getAllClients(surname, phone);
-        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients)); //возвращает HTTP-ответ со статусом 200 и телом ответа, содержащим преобразованные объекты Dto
+    public ResponseEntity<List<ClientDto>> getAllClients(String surname, String phone, Integer offset, Integer limit) {
+        List<ClientItem> allClients = clientService.getAllClients(surname, phone, offset, limit);
+        return ResponseEntity.ok(ClientMapper.INSTANCE.mapToDtos(allClients));
     }
 
     @Override

@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import ru.vsu.cs.sapegin.bd_proj_att2.api.model.special.ServiceDtoForSingleClient;
 
 import java.util.List;
@@ -35,8 +37,6 @@ public class ClientDto {
     private String name;
 
     @Size(min = 11, max = 11)
-//    @Min(11)
-//    @Max(11)
     private String phone;
 
     //Пока в этом поле смысла нет (в основном, так как зацикливает и содержит объективно лишнюю инфу)
